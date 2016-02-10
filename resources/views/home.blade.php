@@ -2,66 +2,68 @@
 <html>
     <head>
         <title>MC</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
     </head>
     <body>
         <div class="container">
-            <div class="content">
-            <?php if (Auth::check()): ?>
+            <div class="row">
+                
+            @if (Auth::check())
                 <h1>Welcome, {{ Auth::user()->name }}</h1>
                 <a href="{{ URL::to('auth/logout') }}">Logout</a>
-            <?php else: ?>
-                <h3>Login</h3>
+                @else
+                <h1>Welcome</h1>
+                <div class="col-md-4">
+                    <h3>Login</h3>
                     <form method="POST" action="/auth/login">
                         {!! csrf_field() !!}
-
-                        <div>
-                            Email
-                            <input type="email" name="email" value="{{ old('email') }}">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" name="email" value="{{ old('email') }}">
                         </div>
 
-                        <div>
-                            Password
-                            <input type="password" name="password" id="password">
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" name="password" id="password">
                         </div>
 
-                        <div>
+                        <div class="form-group">
                             <input type="checkbox" name="remember"> Remember Me
                         </div>
 
                         <div>
-                            <button type="submit">Login</button>
+                            <button type="submit" class="btn btn-primary">Login</button>
                         </div>
                     </form>
-                   <h3>Register</h3>
+                </div> 
+                <div class="col-md-4">   
+                    <h3>Register</h3>
                     <form method="POST" action="/auth/register">
                         {!! csrf_field() !!}
-
-                        <div>
-                            Name
-                            <input type="text" name="name" value="{{ old('name') }}">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                         </div>
-
-                        <div>
-                            Email
-                            <input type="email" name="email" value="{{ old('email') }}">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" name="email" value="{{ old('email') }}">
                         </div>
-
-                        <div>
-                            Password
-                            <input type="password" name="password">
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" name="password">
                         </div>
-
-                        <div>
-                            Confirm Password
-                            <input type="password" name="password_confirmation">
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input type="password" class="form-control" name="password_confirmation">
                         </div>
-
                         <div>
-                            <button type="submit">Register</button>
+                            <button type="submit" class="btn btn-primary">Register</button>
                         </div>
-                    </form> 
-                <?php endif; ?>    
-            </div>
+                    </form>
+                </div>     
+                @endif 
+                </div>
+            </div>    
         </div>
     </body>
 </html>
