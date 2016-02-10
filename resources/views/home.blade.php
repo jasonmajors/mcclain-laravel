@@ -11,15 +11,22 @@
             @if (Auth::check())
                 <h1>Welcome, {{ Auth::user()->name }}</h1>
                 <a href="{{ URL::to('auth/logout') }}">Logout</a>
-                @else
+            @else
                 <h1>Welcome</h1>
+                @if (count($errors))
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                @endif        
                 <div class="col-md-4">
                     <h3>Login</h3>
                     <form method="POST" action="/auth/login">
                         {!! csrf_field() !!}
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+                            <input type="email" class="form-control" name="email">
                         </div>
 
                         <div class="form-group">
@@ -42,11 +49,11 @@
                         {!! csrf_field() !!}
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                            <input type="text" class="form-control" name="name">
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+                            <input type="email" class="form-control" name="email">
                         </div>
                         <div class="form-group">
                             <label>Password</label>
@@ -61,7 +68,7 @@
                         </div>
                     </form>
                 </div>     
-                @endif 
+            @endif 
                 </div>
             </div>    
         </div>
